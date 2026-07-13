@@ -14,14 +14,16 @@ protected:
     int userId;
 public:
     Account(std::string full, std::string user, std::string b, Role r, std::string pass, int id);
-    void editUserName(const std::string& newUserName);
-    void changePassword(const std::string& newPassword);
+
     std::string getFullName() const;
     std::string getUserName() const;
     std::string getBio() const;
     Role getRole() const;
     std::string getPass() const;
     int getId() const;
+
+    void editUserName(const std::string& newUserName);
+    void changePassword(const std::string& newPassword);
 };
 
 #endif // ACCOUNT_H

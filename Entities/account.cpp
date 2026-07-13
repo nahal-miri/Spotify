@@ -8,14 +8,6 @@ Account::Account(std::string full, std::string user, std::string b, Role r, std:
     password(pass),
     userId(id) {}
 
-void Account::editUserName(const std::string& newUserName) {
-    this->userName = newUserName;
-}
-
-void Account::changePassword(const std::string& newPassword) {
-    this->password = newPassword;
-}
-
 std::string Account::getFullName() const {
     return this->fullName;
 }
@@ -38,4 +30,12 @@ std::string Account::getPass() const {
 
 int Account::getId() const {
     return this->userId;
+}
+
+void Account::editUserName(const std::string& newUserName) {
+    this->userName = newUserName;
+}
+
+void Account::changePassword(const std::string& newPassword) {
+    this->password = newPassword;
 }
