@@ -20,7 +20,7 @@ int Album::getArtistId() const {
 const std::vector<std::shared_ptr<Song>>& Album::getSongs() const {
     return this->songs;
 }
-void Album::setName(const std::string& name) {
+void Album::setAlbumName(const std::string& name) {
     this->albumName = name;
 }
 
