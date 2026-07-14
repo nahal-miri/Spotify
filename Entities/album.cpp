@@ -1,7 +1,12 @@
 #include "album.h"
 
-Album::Album(std::string name, int albumId, int artistId)
-    : albumName(name),
+Album::Album(const std::string& albumName, int artistId)
+    : albumName(albumName),
+    albumId(0),
+    artistId(artistId) {}
+
+Album::Album(const std::string& albumName, int albumId, int artistId)
+    : albumName(albumName),
     albumId(albumId),
     artistId(artistId) {}
 
@@ -22,6 +27,10 @@ const std::vector<std::shared_ptr<Song>>& Album::getSongs() const {
 }
 void Album::setAlbumName(const std::string& name) {
     this->albumName = name;
+}
+
+void Album::setAlbumID(int id) {
+    this->albumId = id;
 }
 
 void Album::addSong(const std::shared_ptr<Song>& newSong) {

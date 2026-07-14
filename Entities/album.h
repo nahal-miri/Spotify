@@ -13,7 +13,8 @@ private:
     int artistId;
     std::vector<std::shared_ptr<Song>> songs;
 public:
-    Album(std::string name, int albumId, int artistId);
+    Album(const std::string& albumName, int artistId);
+    Album(const std::string& albumName, int albumId, int artistId);
 
     std::string getName() const;
     int getAlbumId() const;
@@ -21,6 +22,7 @@ public:
     const std::vector<std::shared_ptr<Song>>& getSongs() const;
 
     void setAlbumName(const std::string& name);
+    void setAlbumID(int id);
 
     void addSong(const std::shared_ptr<Song>& newSong);
     void removeSong(int songId);

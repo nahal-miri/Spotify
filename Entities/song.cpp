@@ -1,13 +1,22 @@
 #include "song.h"
 
-Song::Song(std::string songName, int releaseYear, std::string genre, std::string audioFileName, int songId, int artistId, int albumId)
+Song::Song(std::string songName, int releaseYear, std::string genre, std::string audioFilePath, int artistId, int albumId)
     : songName(songName),
     releaseYear(releaseYear),
     genre(genre),
-    audioFilePath(audioFileName),
-    songId(songId),
+    audioFilePath(audioFilePath),
     artistId(artistId),
-    albumId(albumId){}
+    albumId(albumId),
+    songId(0) {}
+
+Song::Song(std::string songName, int releaseYear, std::string genre, std::string audioFilePath, int songId, int artistId, int albumId)
+    : songName(songName),
+    releaseYear(releaseYear),
+    genre(genre),
+    audioFilePath(audioFilePath),
+    artistId(artistId),
+    albumId(albumId),
+    songId(songId) {}
 
 std::string Song::getSongName() const {
     return this->songName;
@@ -51,6 +60,10 @@ void Song::setGenre(const std::string& newGenre) {
 
 void Song::setFilePath(const std::string& newName) {
     this->audioFilePath = newName;
+}
+
+void Song::setSongId(int id) {
+    this->songId = id;
 }
 
 void Song::setAlbumId(int newId) {
