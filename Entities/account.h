@@ -13,7 +13,8 @@ protected:
     std::string password;
     int userId;
 public:
-    Account(std::string full, std::string user, std::string b, Role r, std::string pass, int id);
+    Account(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password);
+    Account(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id);
 
     std::string getFullName() const;
     std::string getUserName() const;
@@ -21,6 +22,8 @@ public:
     Role getRole() const;
     std::string getPass() const;
     int getId() const;
+
+    void setUserId(int id);
 
     void editUserName(const std::string& newUserName);
     void changePassword(const std::string& newPassword);

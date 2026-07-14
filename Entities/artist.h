@@ -12,7 +12,8 @@ private:
     std::vector<std::shared_ptr<Album>> albums;
     std::vector<std::shared_ptr<Song>> singles;
 public:
-    Artist(std::string fullName, std::string userName, std::string bio, Role role, std::string password, int id);
+    Artist(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password);
+    Artist(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id);
 
     const std::vector<std::shared_ptr<Album>>& getAlbum() const;
     const std::vector<std::shared_ptr<Song>>& getSingleSongs() const;

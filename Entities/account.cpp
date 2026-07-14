@@ -1,11 +1,19 @@
 #include "account.h"
 
-Account::Account(std::string full, std::string user, std::string b, Role r, std::string pass, int id)
-    : fullName(full),
-    userName(user),
-    bio(b),
-    role(r),
-    password(pass),
+Account::Account(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password)
+    : fullName(fullName),
+    userName(userName),
+    bio(bio),
+    role(role),
+    password(password),
+    userId(0) {}
+
+Account::Account(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id)
+    : fullName(fullName),
+    userName(userName),
+    bio(bio),
+    role(role),
+    password(password),
     userId(id) {}
 
 std::string Account::getFullName() const {
@@ -30,6 +38,10 @@ std::string Account::getPass() const {
 
 int Account::getId() const {
     return this->userId;
+}
+
+void Account::setUserId(int id) {
+    this->userId = id;
 }
 
 void Account::editUserName(const std::string& newUserName) {

@@ -1,6 +1,9 @@
 #include "artist.h"
 
-Artist::Artist(std::string fullName, std::string userName, std::string bio, Role role, std::string password, int id)
+Artist::Artist(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password)
+    : Account(fullName, userName, bio, role, password) {}
+
+Artist::Artist(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id)
     : Account(fullName, userName, bio, role, password, id) {}
 
 const std::vector<std::shared_ptr<Album>>& Artist::getAlbum() const {

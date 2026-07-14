@@ -1,6 +1,11 @@
 #include "playlist.h"
 
-Playlist::Playlist(std::string playlistName, int listenerId, int playlistId)
+Playlist::Playlist(const std::string& playlistName, int listenerId)
+    : playlistName(playlistName),
+    listenerId(listenerId),
+    playlistId(0) {}
+
+Playlist::Playlist(const std::string& playlistName, int listenerId, int playlistId)
     : playlistName(playlistName),
     listenerId(listenerId),
     playlistId(playlistId) {}
@@ -23,6 +28,10 @@ const std::vector<std::shared_ptr<Song>>& Playlist::getSongs() const {
 
 void Playlist::setPlaylistName(const std::string& newName) {
     this->playlistName = newName;
+}
+
+void Playlist::setPlaylistId(int id) {
+    this->playlistId = id;
 }
 
 void Playlist::addSong(const std::shared_ptr<Song>& newSong) {
