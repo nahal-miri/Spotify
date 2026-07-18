@@ -1,10 +1,25 @@
 #ifndef ALBUMREPOSITORY_H
 #define ALBUMREPOSITORY_H
+#include "AbstractRepository.h"
+#include "../Entities/album.h"
+#include <vector>
+#include <optional>
 
-class AlbumRepository
+class AlbumRepository : public AbstractRepository<Album>
 {
-public:
+private:
+    std::vector<std::shared_ptr<Album>> albums;
+    int nextId;
+    static AlbumRepository instance;
+
     AlbumRepository();
+public:
+    static AlbumRepository& getInstance();
+
+    int save(const std::shared_ptr<Album>& obj) override;
+    bool remove(int id) override;
+    std::optional<std::shared_ptr<Album>> search(int id) override;
+    std::vector<std::shared_ptr<Album>> artistAlbums(int id);
 };
 
 #endif // ALBUMREPOSITORY_H
