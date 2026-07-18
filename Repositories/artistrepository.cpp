@@ -1,5 +1,7 @@
 #include "artistrepository.h"
 
+ArtistRepository ArtistRepository::instance;
+
 ArtistRepository::ArtistRepository() : nextId(1) {}
 
 ArtistRepository& ArtistRepository::getInstance() {

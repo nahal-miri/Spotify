@@ -6,23 +6,8 @@ Listener::Listener(const std::string& fullName, const std::string& userName, con
 Listener::Listener(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id)
     : Account(fullName, userName, bio, role, password, id) {}
 
-const std::vector<std::shared_ptr<Playlist>>& Listener::getPlaylists() const {
-    return this->playlists;
-}
-
 const std::vector<int>& Listener::getLikedSongsId() const {
     return this->likedSongsIds;
-}
-
-void Listener::addPlaylist(const std::shared_ptr<Playlist>& playlist) {
-    playlists.push_back(playlist);
-}
-
-void Listener::removePLaylist(int playlistId) {
-    for(int i = 0; i < playlists.size(); i++) {
-        if(playlists[i]->getPlaylistId() == playlistId)
-            playlists.erase(playlists.begin() + i);
-    }
 }
 
 void Listener::likeSong(int songId) {

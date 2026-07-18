@@ -1,6 +1,6 @@
 #include "albumrepository.h"
-#include "artistrepository.h"
-#include "../Entities/artist.h"
+
+AlbumRepository  AlbumRepository::instance;
 
 AlbumRepository::AlbumRepository() : nextId(1) {}
 
@@ -55,13 +55,13 @@ std::optional<std::shared_ptr<Album>> AlbumRepository::search(int id) {
 }
 
 std::vector<std::shared_ptr<Album>> AlbumRepository::artistAlbums(int id) {
-    auto account = ArtistRepository::getInstance().search(id);
-    if(!account)
-        return {};
 
-    auto artist = std::dynamic_pointer_cast<Artist>(*account);
-    if(!artist)
-        return {};
+    std::vector<std::shared_ptr<Album>> result;
 
-    return artist->getAlbum();
+    for(const auto& album : albums) {
+        if(album->getArtistId() == id)
+            result.push_back(album);
+    }
+
+    return result;
 }

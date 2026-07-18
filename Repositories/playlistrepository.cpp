@@ -1,7 +1,5 @@
 #include "playlistrepository.h"
 #include "songrepository.h"
-#include "listenerrepository.h"
-#include "../Entities/listener.h"
 
 PlaylistRepository::PlaylistRepository() : nextId(1) {}
 
@@ -89,13 +87,12 @@ bool PlaylistRepository::removeSong(int playlistId, int songId) {
 }
 
 std::vector<std::shared_ptr<Playlist>> PlaylistRepository::listenerPlaylists(int listenerId) {
-    auto account = ListenerRepository::getInstance().search(listenerId);
-    if(!account)
-        return {};
+    std::vector<std::shared_ptr<Playlist>> result;
 
-    auto listener = std::dynamic_pointer_cast<Listener>(*account);
-    if(!listener)
-        return {};
+    for(const auto& playlist : playlists) {
+        if(playlist->getListenerId() == listenerId)
+            result.push_back(playlist);
+    }
 
-    return listener->getPlaylists();
+    return result;
 }

@@ -30,7 +30,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Entities/playlist.cpp
         Entities/song.cpp
         Repositories/AbstractRepository.h
-        Repositories/accountrepository.cpp
+
         Repositories/albumrepository.cpp
         Repositories/artistrepository.cpp
         Repositories/listenerrepository.cpp

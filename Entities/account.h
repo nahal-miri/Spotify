@@ -16,6 +16,8 @@ public:
     Account(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password);
     Account(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id);
 
+    virtual ~Account() = default;
+
     std::string getFullName() const;
     std::string getUserName() const;
     std::string getBio() const;

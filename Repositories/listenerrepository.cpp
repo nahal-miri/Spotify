@@ -1,6 +1,8 @@
 #include "listenerrepository.h"
 #include "songrepository.h"
 
+ListenerRepository ListenerRepository::instance;
+
 ListenerRepository::ListenerRepository() : nextId(1) {}
 
 ListenerRepository& ListenerRepository::getInstance() {

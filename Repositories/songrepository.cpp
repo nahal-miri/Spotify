@@ -2,6 +2,8 @@
 #include "listenerrepository.h"
 #include "../Entities/listener.h"
 
+SongRepository SongRepository::instance;
+
 SongRepository::SongRepository() : nextId(1) {}
 
 SongRepository& SongRepository::getInstance() {
@@ -55,13 +57,13 @@ std::optional<std::shared_ptr<Song>> SongRepository::search(int id) {
 }
 
 std::vector<std::shared_ptr<Song>> SongRepository::singleSongs(int artistId) {
-    std::vector<std::shared_ptr<Song>> singleSongs;
+    std::vector<std::shared_ptr<Song>> result;
     for(const auto& song : songs) {
         if(song->getArtistId() == artistId && song->getAlbumId() == 0)
-            singleSongs.push_back(song);
+            result.push_back(song);
     }
 
-    return singleSongs;
+    return result;
 }
 
 std::vector<std::shared_ptr<Song>> SongRepository::getByAlbum(int albumId) {
