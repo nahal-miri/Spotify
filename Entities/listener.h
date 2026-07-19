@@ -2,7 +2,6 @@
 #define LISTENER_H
 #include <vector>
 #include <string>
-#include <memory>
 #include "account.h"
 #include "playlist.h"
 
@@ -19,6 +18,8 @@ public:
     void likeSong(int songId);
     void unlikeSong(int songId);
     bool isLiked(int songId) const;
+
+    std::shared_ptr<Playlist> createPlaylist(const std::string& playlistName);
 };
 
 #endif // LISTENER_H

@@ -2,6 +2,7 @@
 #define SONGREPOSITORY_H
 #include "AbstractRepository.h"
 #include "../Entities/song.h"
+#include "../Entities/artist.h"
 #include <vector>
 #include <optional>
 
@@ -24,6 +25,9 @@ public:
     std::vector<std::shared_ptr<Song>> getByArtist(int artistId);
     std::vector<std::shared_ptr<Song>> getByPlaylist(int playlistId);
     std::vector<std::shared_ptr<Song>> getByLikedSongs(int listenerId);
+
+    int createSong(Artist& artist, const std::string& songName, int releaseYear, const std::string& genre, const std::string& audioFilePath, int albumId);
+
 };
 
 #endif // SONGREPOSITORY_H

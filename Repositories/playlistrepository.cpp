@@ -1,7 +1,13 @@
 #include "playlistrepository.h"
 #include "songrepository.h"
 
+PlaylistRepository PlaylistRepository::instance;
+
 PlaylistRepository::PlaylistRepository() : nextId(1) {}
+
+PlaylistRepository& PlaylistRepository::getInstance() {
+    return instance;
+}
 
 int PlaylistRepository::save(const std::shared_ptr<Playlist>& obj) {
     bool found = false;
@@ -95,4 +101,15 @@ std::vector<std::shared_ptr<Playlist>> PlaylistRepository::listenerPlaylists(int
     }
 
     return result;
+}
+
+void PlaylistRepository::removeSongFromAllPlaylists(int songId) {
+    for (const auto& playlist : playlists) {
+        playlist->removeSong(songId);
+    }
+}
+
+int PlaylistRepository::createPlaylist(Listener& listener, const std::string& playlistName) {
+    auto playlist = listener.createPlaylist(playlistName);
+    return save(playlist);
 }

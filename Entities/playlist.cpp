@@ -37,6 +37,7 @@ void Playlist::setPlaylistId(int id) {
 void Playlist::addSong(const std::shared_ptr<Song>& newSong) {
     songs.push_back(newSong);
 }
+
 void Playlist::removeSong(int songId) {
     for(int i = 0; i < songs.size(); i++) {
         if(songs[i]->getSongId() == songId) {

@@ -16,7 +16,7 @@ private:
 public:
     static ArtistRepository& getInstance();
 
-    const std::vector<std::shared_ptr<Artist>>& getArtists();
+    const std::vector<std::shared_ptr<Artist>>& getArtists() const;
 
     int save(const std::shared_ptr<Account>& obj) override;
     bool remove(int id) override;

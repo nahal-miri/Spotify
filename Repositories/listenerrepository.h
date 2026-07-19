@@ -5,7 +5,7 @@
 #include <vector>
 #include <optional>
 
-class ListenerRepository : AccountRepository
+class ListenerRepository : public AccountRepository
 {
 private:
     std::vector<std::shared_ptr<Listener>> listeners;
@@ -22,6 +22,8 @@ public:
     std::optional<std::shared_ptr<Account>> searchByUserName(const std::string& userName) override;
     bool updateLiked(int listenerId, int songId, bool value);
     bool isLiked(int listenerId, int songId);
+
+    bool removeLikedSong(int songId);
 };
 
 #endif // LISTENERREPOSITORY_H

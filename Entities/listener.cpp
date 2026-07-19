@@ -32,3 +32,7 @@ bool Listener::isLiked(int songId) const {
 
     return false;
 }
+
+std::shared_ptr<Playlist> Listener::createPlaylist(const std::string& playlistName) {
+    return std::make_shared<Playlist>(playlistName, this->userId);
+}

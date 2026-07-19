@@ -1,5 +1,6 @@
 #include "listenerrepository.h"
 #include "songrepository.h"
+#include "playlistrepository.h"
 
 ListenerRepository ListenerRepository::instance;
 
@@ -38,7 +39,18 @@ int ListenerRepository::save(const std::shared_ptr<Account>& obj) {
 
     return -1;
 }
+
 bool ListenerRepository::remove(int id) {
+    auto listener = search(id);
+    if(!listener)
+        return false;
+
+    auto playlists = PlaylistRepository::getInstance().listenerPlaylists(id);
+
+    for(const auto& playlist : playlists) {
+        PlaylistRepository::getInstance().remove(playlist->getPlaylistId());
+    }
+
     for(int i = 0; i < listeners.size(); i++) {
         if(listeners[i]->getId() == id) {
             listeners.erase(listeners.begin() + i);
@@ -48,6 +60,7 @@ bool ListenerRepository::remove(int id) {
 
     return false;
 }
+
 std::optional<std::shared_ptr<Account>> ListenerRepository::search(int id) {
     for(int i = 0; i < listeners.size(); i++) {
         if(listeners[i]->getId() == id)
@@ -102,4 +115,12 @@ bool ListenerRepository::isLiked(int listenerId, int songId) {
     }
 
     return false;
+}
+
+bool ListenerRepository::removeLikedSong(int songId) {
+    for (const auto& listener : listeners) {
+        listener->unlikeSong(songId);
+    }
+
+    return true;
 }

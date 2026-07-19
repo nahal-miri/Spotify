@@ -1,4 +1,6 @@
 #include "artistrepository.h"
+#include "albumrepository.h"
+#include "songrepository.h"
 
 ArtistRepository ArtistRepository::instance;
 
@@ -8,7 +10,7 @@ ArtistRepository& ArtistRepository::getInstance() {
     return instance;
 }
 
-const std::vector<std::shared_ptr<Artist>>& ArtistRepository::getArtists() {
+const std::vector<std::shared_ptr<Artist>>& ArtistRepository::getArtists() const {
     return this->artists;
 }
 
@@ -43,6 +45,25 @@ int ArtistRepository::save(const std::shared_ptr<Account>& obj) {
 }
 
 bool ArtistRepository::remove(int id) {
+    auto artist = search(id);
+    if(!artist)
+        return false;
+
+    auto songs = SongRepository::getInstance().getByArtist(id);
+
+    for(const auto& song : songs) {
+        if(song->getAlbumId() == 0) {
+            SongRepository::getInstance().remove(song->getSongId());
+        }
+    }
+
+
+    auto albums = AlbumRepository::getInstance().artistAlbums(id);
+
+    for(const auto& album : albums) {
+        AlbumRepository::getInstance().remove(album->getAlbumId());
+    }
+
     for(int i = 0; i < artists.size(); i++) {
         if(artists[i]->getId() == id) {
             artists.erase(artists.begin() + i);

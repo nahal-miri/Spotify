@@ -2,6 +2,7 @@
 #define ALBUMREPOSITORY_H
 #include "AbstractRepository.h"
 #include "../Entities/album.h"
+#include "../Entities/artist.h"
 #include <vector>
 #include <optional>
 
@@ -20,6 +21,10 @@ public:
     bool remove(int id) override;
     std::optional<std::shared_ptr<Album>> search(int id) override;
     std::vector<std::shared_ptr<Album>> artistAlbums(int id);
+
+    int createAlbum(Artist& artist, const std::string& albumName);
+    bool insertSong(int albumId, int songId);
+    bool removeSong(int albumId, int songId);
 };
 
 #endif // ALBUMREPOSITORY_H
