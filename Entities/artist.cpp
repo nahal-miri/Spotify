@@ -1,10 +1,10 @@
 #include "artist.h"
 
-Artist::Artist(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password)
-    : Account(fullName, userName, bio, role, password) {}
+Artist::Artist(const std::string& fullName, const std::string& userName, const std::string& bio, const std::string& password)
+    : Account(fullName, userName, bio, Role::Artist, password) {}
 
-Artist::Artist(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id)
-    : Account(fullName, userName, bio, role, password, id) {}
+Artist::Artist(const std::string& fullName, const std::string& userName, const std::string& bio, const std::string& password, int id)
+    : Account(fullName, userName, bio, Role::Artist, password, id) {}
 
 std::shared_ptr<Album> Artist::createAlbum(const std::string& albumName) {
     return std::make_shared<Album>(albumName, this->userId);

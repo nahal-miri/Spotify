@@ -5,6 +5,7 @@
 #include "../Entities/artist.h"
 #include <vector>
 #include <optional>
+#include <string>
 
 class AlbumRepository : public AbstractRepository<Album>
 {
@@ -25,6 +26,7 @@ public:
     int createAlbum(Artist& artist, const std::string& albumName);
     bool insertSong(int albumId, int songId);
     bool removeSong(int albumId, int songId);
+    void sortByName(std::vector<std::shared_ptr<Album>>& albums);
 };
 
 #endif // ALBUMREPOSITORY_H

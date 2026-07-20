@@ -32,12 +32,28 @@ Role Account::getRole() const {
     return this->role;
 }
 
-std::string Account::getPass() const {
+std::string Account::getPassword() const {
     return this->password;
 }
 
 int Account::getId() const {
     return this->userId;
+}
+
+void Account::setFullName(const std::string& newName) {
+    this->fullName = newName;
+}
+
+void Account::setUserName(const std::string& newName) {
+    this->userName = newName;
+}
+
+void Account::setBio(const std::string& newBio) {
+    this->bio = newBio;
+}
+
+void Account::setPassword(const std::string& newPass) {
+    this->password = newPass;
 }
 
 void Account::setUserId(int id) {

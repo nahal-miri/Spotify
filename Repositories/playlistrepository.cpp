@@ -1,5 +1,6 @@
 #include "playlistrepository.h"
 #include "songrepository.h"
+#include <algorithm>
 
 PlaylistRepository PlaylistRepository::instance;
 
@@ -112,4 +113,10 @@ void PlaylistRepository::removeSongFromAllPlaylists(int songId) {
 int PlaylistRepository::createPlaylist(Listener& listener, const std::string& playlistName) {
     auto playlist = listener.createPlaylist(playlistName);
     return save(playlist);
+}
+
+void PlaylistRepository::sortByName(std::vector<std::shared_ptr<Playlist>>& playlists) {
+    std::sort(playlists.begin(), playlists.end(), [](const auto& a, const auto& b) {
+        return a->getPlaylistName() < b->getPlaylistName();
+    });
 }

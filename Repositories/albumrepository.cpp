@@ -1,5 +1,6 @@
 #include "albumrepository.h"
 #include "songrepository.h"
+#include <algorithm>
 
 AlbumRepository  AlbumRepository::instance;
 
@@ -46,8 +47,8 @@ bool AlbumRepository::remove(int id) {
         songIds.push_back(song->getSongId());
     }
 
-    for(int id : songIds) {
-        SongRepository::getInstance().remove(id);
+    for(int songId : songIds) {
+        SongRepository::getInstance().remove(songId);
     }
 
     for(int i = 0; i < albums.size(); i++) {
@@ -128,4 +129,10 @@ bool AlbumRepository::removeSong(int albumId, int songId) {
     (*song)->setAlbumId(0);
 
     return true;
+}
+
+void AlbumRepository::sortByName(std::vector<std::shared_ptr<Album>>& albums) {
+    std::sort(albums.begin(), albums.end(), [](const auto& a, const auto& b) {
+        return a->getName() < b->getName();
+    });
 }

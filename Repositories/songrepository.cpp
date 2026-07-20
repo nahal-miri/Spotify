@@ -3,6 +3,7 @@
 #include "playlistrepository.h"
 #include "listenerrepository.h"
 #include "../Entities/listener.h"
+#include <algorithm>
 
 SongRepository SongRepository::instance;
 
@@ -152,4 +153,49 @@ int SongRepository::createSong(Artist& artist, const std::string& songName, int 
     }
 
     return songId;
+}
+
+std::vector<std::shared_ptr<Song>> SongRepository::searchByName(const std::vector<std::shared_ptr<Song>>& songsList, const std::string& name) {
+    std::vector<std::shared_ptr<Song>> result;
+
+    for (const auto& song : songsList) {
+        if (song->getSongName().find(name) != std::string::npos)
+            result.push_back(song);
+    }
+
+    return result;
+}
+
+std::vector<std::shared_ptr<Song>> SongRepository::filterByGenre(const std::vector<std::shared_ptr<Song>>& songsList,const std::string& genre) {
+    std::vector<std::shared_ptr<Song>> result;
+
+    for (const auto& song : songsList) {
+        if (song->getGenre() == genre)
+            result.push_back(song);
+    }
+
+    return result;
+}
+
+std::vector<std::shared_ptr<Song>> SongRepository::filterByYear(const std::vector<std::shared_ptr<Song>>& songs, int year) {
+    std::vector<std::shared_ptr<Song>> result;
+
+    for (const auto& song : songs){
+        if (song->getReleaseYear() == year)
+            result.push_back(song);
+    }
+
+    return result;
+}
+
+void SongRepository::sortByName(std::vector<std::shared_ptr<Song>>& songs) {
+    std::sort(songs.begin(), songs.end(), [](const auto& a, const auto& b) {
+        return a->getSongName() < b->getSongName();
+    });
+}
+
+void SongRepository::sortByYear(std::vector<std::shared_ptr<Song>>& songs) {
+    std::sort(songs.begin(), songs.end(), [](const auto& a, const auto& b) {
+        return a->getReleaseYear() < b->getReleaseYear();
+    });
 }

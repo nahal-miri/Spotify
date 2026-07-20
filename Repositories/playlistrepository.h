@@ -5,6 +5,8 @@
 #include "../Entities/listener.h"
 #include <vector>
 #include <optional>
+#include <memory>
+#include <string>
 
 class PlaylistRepository : public AbstractRepository<Playlist>
 {
@@ -26,6 +28,7 @@ public:
 
     void removeSongFromAllPlaylists(int songId);
     int createPlaylist(Listener& listener, const std::string& playlistName);
+    void sortByName(std::vector<std::shared_ptr<Playlist>>& playlists);
 };
 
 #endif // PLAYLISTREPOSITORY_H

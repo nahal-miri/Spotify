@@ -1,10 +1,10 @@
 #include "listener.h"
 
-Listener::Listener(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password)
-    : Account(fullName, userName, bio, role, password) {}
+Listener::Listener(const std::string& fullName, const std::string& userName, const std::string& bio, const std::string& password)
+    : Account(fullName, userName, bio, Role::Listener, password) {}
 
-Listener::Listener(const std::string& fullName, const std::string& userName, const std::string& bio, Role role, const std::string& password, int id)
-    : Account(fullName, userName, bio, role, password, id) {}
+Listener::Listener(const std::string& fullName, const std::string& userName, const std::string& bio, const std::string& password, int id)
+    : Account(fullName, userName, bio, Role::Listener, password, id) {}
 
 const std::vector<int>& Listener::getLikedSongsId() const {
     return this->likedSongsIds;

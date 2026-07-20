@@ -5,6 +5,8 @@
 #include "../Entities/artist.h"
 #include <vector>
 #include <optional>
+#include <memory>
+#include <string>
 
 class SongRepository : public AbstractRepository<Song>
 {
@@ -27,7 +29,11 @@ public:
     std::vector<std::shared_ptr<Song>> getByLikedSongs(int listenerId);
 
     int createSong(Artist& artist, const std::string& songName, int releaseYear, const std::string& genre, const std::string& audioFilePath, int albumId);
-
+    std::vector<std::shared_ptr<Song>> searchByName(const std::vector<std::shared_ptr<Song>>& songsList, const std::string& name);
+    std::vector<std::shared_ptr<Song>> filterByGenre(const std::vector<std::shared_ptr<Song>>& songsList, const std::string& genre);
+    std::vector<std::shared_ptr<Song>> filterByYear(const std::vector<std::shared_ptr<Song>>& songsList, int year);
+    void sortByName(std::vector<std::shared_ptr<Song>>& songs);
+    void sortByYear(std::vector<std::shared_ptr<Song>>& songs);
 };
 
 #endif // SONGREPOSITORY_H

@@ -4,6 +4,8 @@
 #include "../Entities/artist.h"
 #include <vector>
 #include <optional>
+#include <memory>
+#include <string>
 
 class ArtistRepository : public AccountRepository
 {

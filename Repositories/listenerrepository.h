@@ -4,6 +4,8 @@
 #include "../Entities/listener.h"
 #include <vector>
 #include <optional>
+#include <memory>
+#include <string>
 
 class ListenerRepository : public AccountRepository
 {

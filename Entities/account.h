@@ -22,9 +22,13 @@ public:
     std::string getUserName() const;
     std::string getBio() const;
     Role getRole() const;
-    std::string getPass() const;
+    std::string getPassword() const;
     int getId() const;
 
+    void setFullName(const std::string& newName);
+    void setUserName(const std::string& newName);
+    void setBio(const std::string& newBio);
+    void setPassword(const std::string& newPass);
     void setUserId(int id);
 
     void editUserName(const std::string& newUserName);
