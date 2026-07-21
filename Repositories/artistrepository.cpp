@@ -1,6 +1,10 @@
 #include "artistrepository.h"
 #include "albumrepository.h"
 #include "songrepository.h"
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
+#include <memory>
 
 ArtistRepository ArtistRepository::instance;
 
@@ -23,8 +27,25 @@ int ArtistRepository::save(const std::shared_ptr<Account>& obj) {
     int foundInd = -1;
     if(artist->getId() == 0) {
         artist->setUserId(nextId);
+        QSqlQuery query;
+        query.prepare(
+            "INSERT INTO artists "
+            "(artistId, fullName, userName, bio, password) "
+            "VALUES (?, ?, ?, ?, ?)"
+            );
+
+        query.addBindValue(artist->getId());
+        query.addBindValue(QString::fromStdString(artist->getFullName()));
+        query.addBindValue(QString::fromStdString(artist->getUserName()));
+        query.addBindValue(QString::fromStdString(artist->getBio()));
+        query.addBindValue(QString::fromStdString(artist->getPassword()));
+
+        if(!query.exec())
+            return -1;
+
         nextId++;
         artists.push_back(artist);
+
         return artist->getId();
     }
 
@@ -37,7 +58,27 @@ int ArtistRepository::save(const std::shared_ptr<Account>& obj) {
     }
 
     if(found) {
+        QSqlQuery query;
+        query.prepare(
+            "UPDATE artists SET "
+            "fullName=?, "
+            "userName=?, "
+            "bio=?, "
+            "password=? "
+            "WHERE artistId=?"
+            );
+
+        query.addBindValue(QString::fromStdString(artist->getFullName()));
+        query.addBindValue(QString::fromStdString(artist->getUserName()));
+        query.addBindValue(QString::fromStdString(artist->getBio()));
+        query.addBindValue(QString::fromStdString(artist->getPassword()));
+        query.addBindValue(artist->getId());
+
+        if(!query.exec())
+            return -1;
+
         artists[foundInd] = artist;
+
         return artist->getId();
     }
 
@@ -50,6 +91,13 @@ bool ArtistRepository::remove(int id) {
         return false;
 
     auto songs = SongRepository::getInstance().getByArtist(id);
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM artists WHERE artistId=?");
+    query.addBindValue(id);
+
+    if(!query.exec())
+        return false;
 
     for(const auto& song : songs) {
         if(song->getAlbumId() == 0) {
@@ -71,16 +119,29 @@ bool ArtistRepository::remove(int id) {
         }
     }
 
-    return false;
+    return true;
 }
 
 std::optional<std::shared_ptr<Account>> ArtistRepository::search(int id) {
-    for(int i = 0; i < artists.size(); i++) {
-        if(artists[i]->getId() == id)
-            return artists[i];
-    }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM artists WHERE artistId=?");
+    query.addBindValue(id);
 
-    return std::nullopt;
+    if(!query.exec())
+        return std::nullopt;
+
+    if(!query.next())
+        return std::nullopt;
+
+    auto artist = std::make_shared<Artist>(
+        query.value("fullName").toString().toStdString(),
+        query.value("userName").toString().toStdString(),
+        query.value("bio").toString().toStdString(),
+        query.value("password").toString().toStdString(),
+        query.value("artistId").toInt()
+        );
+
+    return artist;
 }
 
 std::optional<std::shared_ptr<Account>> ArtistRepository::searchByUserName(const std::string& userName) {
@@ -90,4 +151,24 @@ std::optional<std::shared_ptr<Account>> ArtistRepository::searchByUserName(const
     }
 
     return std::nullopt;
+}
+
+void ArtistRepository::loadArtists() {
+    artists.clear();
+    QSqlQuery query("SELECT * FROM artists");
+
+    while(query.next()) {
+        auto artist = std::make_shared<Artist>(
+            query.value("fullName").toString().toStdString(),
+            query.value("userName").toString().toStdString(),
+            query.value("bio").toString().toStdString(),
+            query.value("password").toString().toStdString(),
+            query.value("artistId").toInt()
+            );
+
+        artists.push_back(artist);
+
+        if(artist->getId() >= nextId)
+            nextId = artist->getId() + 1;
+    }
 }

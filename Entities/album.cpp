@@ -29,7 +29,7 @@ void Album::setAlbumName(const std::string& name) {
     this->albumName = name;
 }
 
-void Album::setAlbumID(int id) {
+void Album::setAlbumId(int id) {
     this->albumId = id;
 }
 

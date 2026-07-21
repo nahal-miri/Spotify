@@ -27,6 +27,8 @@ public:
     bool insertSong(int albumId, int songId);
     bool removeSong(int albumId, int songId);
     void sortByName(std::vector<std::shared_ptr<Album>>& albums);
+
+    void loadAlbums();
 };
 
 #endif // ALBUMREPOSITORY_H

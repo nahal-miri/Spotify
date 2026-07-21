@@ -26,6 +26,8 @@ public:
     bool isLiked(int listenerId, int songId);
 
     bool removeLikedSong(int songId);
+
+    void loadListeners();
 };
 
 #endif // LISTENERREPOSITORY_H

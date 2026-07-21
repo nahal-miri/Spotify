@@ -34,6 +34,8 @@ public:
     std::vector<std::shared_ptr<Song>> filterByYear(const std::vector<std::shared_ptr<Song>>& songsList, int year);
     void sortByName(std::vector<std::shared_ptr<Song>>& songs);
     void sortByYear(std::vector<std::shared_ptr<Song>>& songs);
+
+    void loadSongs();
 };
 
 #endif // SONGREPOSITORY_H

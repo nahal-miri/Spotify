@@ -22,7 +22,7 @@ public:
     const std::vector<std::shared_ptr<Song>>& getSongs() const;
 
     void setAlbumName(const std::string& name);
-    void setAlbumID(int id);
+    void setAlbumId(int id);
 
     void addSong(const std::shared_ptr<Song>& newSong);
     void removeSong(int songId);

@@ -3,6 +3,9 @@
 #include "playlistrepository.h"
 #include "listenerrepository.h"
 #include "../Entities/listener.h"
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
 #include <algorithm>
 
 SongRepository SongRepository::instance;
@@ -18,8 +21,29 @@ int SongRepository::save(const std::shared_ptr<Song>& obj) {
     int foundInd = -1;
     if(obj->getSongId() == 0) {
         obj->setSongId(nextId);
+        QSqlQuery query;
+        query.prepare(
+            "INSERT INTO songs "
+            "(songId, songName, releaseYear, genre, audioFilePath, artistId, albumId) "
+            "VALUES (?, ?, ?, ?, ?, ?, ?)"
+            );
+
+        query.addBindValue(obj->getSongId());
+        query.addBindValue(QString::fromStdString(obj->getSongName()));
+        query.addBindValue(obj->getReleaseYear());
+        query.addBindValue(QString::fromStdString(obj->getGenre()));
+        query.addBindValue(QString::fromStdString(obj->getAudioFilePath()));
+        query.addBindValue(obj->getArtistId());
+        query.addBindValue(obj->getAlbumId());
+
+        if(!query.exec()) {
+            qDebug() << query.lastError().text();
+            return -1;
+        }
+
         nextId++;
         songs.push_back(obj);
+
         return obj->getSongId();
     }
 
@@ -32,6 +56,31 @@ int SongRepository::save(const std::shared_ptr<Song>& obj) {
     }
 
     if(found) {
+        QSqlQuery query;
+        query.prepare(
+            "UPDATE songs SET "
+            "songName=?, "
+            "releaseYear=?, "
+            "genre=?, "
+            "audioFilePath=?, "
+            "artistId=?, "
+            "albumId=? "
+            "WHERE songId=?"
+            );
+
+        query.addBindValue(QString::fromStdString(obj->getSongName()));
+        query.addBindValue(obj->getReleaseYear());
+        query.addBindValue(QString::fromStdString(obj->getGenre()));
+        query.addBindValue(QString::fromStdString(obj->getAudioFilePath()));
+        query.addBindValue(obj->getArtistId());
+        query.addBindValue(obj->getAlbumId());
+        query.addBindValue(obj->getSongId());
+
+        if(!query.exec()) {
+            qDebug() << query.lastError().text();
+            return -1;
+        }
+
         songs[foundInd] = obj;
         return obj->getSongId();
     }
@@ -47,9 +96,17 @@ bool SongRepository::remove(int id) {
     if((*song)->getAlbumId() != 0)
         AlbumRepository::getInstance().removeSong((*song)->getAlbumId(), id);
 
-
     PlaylistRepository::getInstance().removeSongFromAllPlaylists(id);
     ListenerRepository::getInstance().removeLikedSong(id);
+
+    QSqlQuery query;
+    query.prepare("DELETE FROM songs WHERE songId=?");
+    query.addBindValue(id);
+
+    if(!query.exec()) {
+        qDebug() << query.lastError().text();
+        return false;
+    }
 
     for(int i = 0; i < songs.size(); i++) {
         if(songs[i]->getSongId() == id) {
@@ -58,16 +115,31 @@ bool SongRepository::remove(int id) {
         }
     }
 
-    return false;
+    return true;
 }
 
 std::optional<std::shared_ptr<Song>> SongRepository::search(int id) {
-    for(const auto& song : songs) {
-        if(song->getSongId() == id)
-            return song;
-    }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM songs WHERE songId=?");
+    query.addBindValue(id);
 
-    return std::nullopt;
+    if(!query.exec())
+        return std::nullopt;
+
+    if(!query.next())
+        return std::nullopt;
+
+    auto song = std::make_shared<Song>(
+        query.value("songName").toString().toStdString(),
+        query.value("releaseYear").toInt(),
+        query.value("genre").toString().toStdString(),
+        query.value("audioFilePath").toString().toStdString(),
+        query.value("songId").toInt(),
+        query.value("artistId").toInt(),
+        query.value("albumId").toInt()
+        );
+
+    return song;
 }
 
 std::vector<std::shared_ptr<Song>> SongRepository::singleSongs(int artistId) {
@@ -198,4 +270,26 @@ void SongRepository::sortByYear(std::vector<std::shared_ptr<Song>>& songs) {
     std::sort(songs.begin(), songs.end(), [](const auto& a, const auto& b) {
         return a->getReleaseYear() < b->getReleaseYear();
     });
+}
+
+void SongRepository::loadSongs() {
+    songs.clear();
+    QSqlQuery query("SELECT * FROM songs");
+
+    while(query.next()) {
+        auto song = std::make_shared<Song>(
+            query.value("songName").toString().toStdString(),
+            query.value("releaseYear").toInt(),
+            query.value("genre").toString().toStdString(),
+            query.value("audioFilePath").toString().toStdString(),
+            query.value("songId").toInt(),
+            query.value("artistId").toInt(),
+            query.value("albumId").toInt()
+            );
+
+        songs.push_back(song);
+
+        if(song->getSongId() >= nextId)
+            nextId = song->getSongId() + 1;
+    }
 }

@@ -1,5 +1,8 @@
 #include "playlistrepository.h"
 #include "songrepository.h"
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
 #include <algorithm>
 
 PlaylistRepository PlaylistRepository::instance;
@@ -11,13 +14,32 @@ PlaylistRepository& PlaylistRepository::getInstance() {
 }
 
 int PlaylistRepository::save(const std::shared_ptr<Playlist>& obj) {
+    auto playlist = std::dynamic_pointer_cast<Playlist>(obj);
+    if(!playlist)
+        return -1;
+
     bool found = false;
     int foundInd = -1;
     if(obj->getPlaylistId() == 0) {
-        obj->setPlaylistId(nextId);
+        playlist->setPlaylistId(nextId);
+        QSqlQuery query;
+        query.prepare(
+            "INSERT INTO playlists "
+            "(playlistId, playlistName, listenerId) "
+            "VALUES (?, ?, ?)"
+            );
+
+        query.addBindValue(playlist->getPlaylistId());
+        query.addBindValue(QString::fromStdString(playlist->getPlaylistName()));
+        query.addBindValue(playlist->getListenerId());
+
+        if(!query.exec())
+            return -1;
+
         nextId++;
-        playlists.push_back(obj);
-        return obj->getPlaylistId();
+        playlists.push_back(playlist);
+
+        return playlist->getPlaylistId();
     }
 
     for(int i = 0; i < playlists.size(); i++) {
@@ -29,14 +51,40 @@ int PlaylistRepository::save(const std::shared_ptr<Playlist>& obj) {
     }
 
     if(found) {
-        playlists[foundInd] = obj;
-        return obj->getPlaylistId();
+        QSqlQuery query;
+        query.prepare(
+            "UPDATE playlists SET "
+            "playlistName=?, "
+            "listenerId=? "
+            "WHERE playlistId=?"
+            );
+
+        query.addBindValue(QString::fromStdString(playlist->getPlaylistName()));
+        query.addBindValue(playlist->getListenerId());
+        query.addBindValue(playlist->getPlaylistId());
+
+        if(!query.exec())
+            return -1;
+
+        playlists[foundInd] = playlist;
+
+        return playlist->getPlaylistId();
     }
 
     return -1;
 }
 
 bool PlaylistRepository::remove(int id) {
+    QSqlQuery query;
+
+    query.prepare("DELETE FROM playlistSongs WHERE playlistId=?");
+    query.addBindValue(id);
+    query.exec();
+
+    query.prepare("DELETE FROM playlists WHERE playlistId=?");
+    query.addBindValue(id);
+    query.exec();
+
     for(int i = 0; i < playlists.size(); i++) {
         if(playlists[i]->getPlaylistId() == id) {
             playlists.erase(playlists.begin() + i);
@@ -48,12 +96,23 @@ bool PlaylistRepository::remove(int id) {
 }
 
 std::optional<std::shared_ptr<Playlist>> PlaylistRepository::search(int id) {
-    for(const auto& playlist : playlists) {
-        if(playlist->getPlaylistId() == id)
-            return playlist;
-    }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM playlists WHERE playlistId=?");
+    query.addBindValue(id);
 
-    return std::nullopt;
+    if(!query.exec())
+        return std::nullopt;
+
+    if(!query.next())
+        return std::nullopt;
+
+    auto playlist = std::make_shared<Playlist>(
+        query.value("playlistName").toString().toStdString(),
+        query.value("listenerId").toInt(),
+        query.value("playlistId").toInt()
+        );
+
+    return playlist;
 }
 
 bool PlaylistRepository::insertSong(int playlistId, int songId) {
@@ -70,6 +129,19 @@ bool PlaylistRepository::insertSong(int playlistId, int songId) {
             return false;
     }
 
+    QSqlQuery query;
+    query.prepare(
+        "INSERT INTO playlistSongs "
+        "(playlistId, songId) "
+        "VALUES (?, ?)"
+        );
+
+    query.addBindValue(playlistId);
+    query.addBindValue(songId);
+
+    if(!query.exec())
+        return false;
+
     (*playlist)->addSong(*song);
     return true;
 }
@@ -85,6 +157,17 @@ bool PlaylistRepository::removeSong(int playlistId, int songId) {
 
     for(const auto& currentSong : (*playlist)->getSongs()) {
         if(currentSong->getSongId() == songId) {
+            QSqlQuery query;
+            query.prepare(
+                "DELETE FROM playlistSongs "
+                "WHERE playlistId=? AND songId=?"
+                );
+
+            query.addBindValue(playlistId);
+            query.addBindValue(songId);
+
+            if(!query.exec())
+                return false;
             (*playlist)->removeSong(songId);
             return true;
         }
@@ -107,6 +190,10 @@ std::vector<std::shared_ptr<Playlist>> PlaylistRepository::listenerPlaylists(int
 void PlaylistRepository::removeSongFromAllPlaylists(int songId) {
     for (const auto& playlist : playlists) {
         playlist->removeSong(songId);
+        QSqlQuery query;
+        query.prepare("DELETE FROM playlistSongs WHERE songId=?");
+        query.addBindValue(songId);
+        query.exec();
     }
 }
 
@@ -119,4 +206,34 @@ void PlaylistRepository::sortByName(std::vector<std::shared_ptr<Playlist>>& play
     std::sort(playlists.begin(), playlists.end(), [](const auto& a, const auto& b) {
         return a->getPlaylistName() < b->getPlaylistName();
     });
+}
+
+void PlaylistRepository::loadPlaylists() {
+    playlists.clear();
+    QSqlQuery query("SELECT * FROM playlists");
+
+    while(query.next()) {
+        auto playlist = std::make_shared<Playlist>(
+            query.value("playlistName").toString().toStdString(),
+            query.value("listenerId").toInt(),
+            query.value("playlistId").toInt()
+            );
+
+        QSqlQuery songQuery;
+        songQuery.prepare("SELECT songId FROM playlistSongs WHERE playlistId=?");
+        songQuery.addBindValue(playlist->getPlaylistId());
+        songQuery.exec();
+
+        while(songQuery.next()) {
+            auto song = SongRepository::getInstance().search(songQuery.value(0).toInt());
+
+            if(song)
+                playlist->addSong(*song);
+        }
+
+        playlists.push_back(playlist);
+
+        if(playlist->getPlaylistId() >= nextId)
+            nextId = playlist->getPlaylistId() + 1;
+    }
 }

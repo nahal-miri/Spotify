@@ -29,6 +29,8 @@ public:
     void removeSongFromAllPlaylists(int songId);
     int createPlaylist(Listener& listener, const std::string& playlistName);
     void sortByName(std::vector<std::shared_ptr<Playlist>>& playlists);
+
+    void loadPlaylists();
 };
 
 #endif // PLAYLISTREPOSITORY_H

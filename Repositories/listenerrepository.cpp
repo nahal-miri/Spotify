@@ -1,6 +1,9 @@
 #include "listenerrepository.h"
 #include "songrepository.h"
 #include "playlistrepository.h"
+#include <QSqlQuery>
+#include <QSqlError>
+#include <QVariant>
 
 ListenerRepository ListenerRepository::instance;
 
@@ -19,8 +22,25 @@ int ListenerRepository::save(const std::shared_ptr<Account>& obj) {
     int foundInd = -1;
     if(listener->getId() == 0) {
         listener->setUserId(nextId);
+        QSqlQuery query;
+        query.prepare(
+            "INSERT INTO listeners "
+            "(listenerId, fullName, userName, bio, password) "
+            "VALUES (?, ?, ?, ?, ?)"
+            );
+
+        query.addBindValue(listener->getId());
+        query.addBindValue(QString::fromStdString(listener->getFullName()));
+        query.addBindValue(QString::fromStdString(listener->getUserName()));
+        query.addBindValue(QString::fromStdString(listener->getBio()));
+        query.addBindValue(QString::fromStdString(listener->getPassword()));
+
+        if(!query.exec())
+            return -1;
+
         nextId++;
         listeners.push_back(listener);
+
         return listener->getId();
     }
 
@@ -33,7 +53,27 @@ int ListenerRepository::save(const std::shared_ptr<Account>& obj) {
     }
 
     if(found) {
+        QSqlQuery query;
+        query.prepare(
+            "UPDATE listeners SET "
+            "fullName=?, "
+            "userName=?, "
+            "bio=?, "
+            "password=? "
+            "WHERE listenerId=?"
+            );
+
+        query.addBindValue(QString::fromStdString(listener->getFullName()));
+        query.addBindValue(QString::fromStdString(listener->getUserName()));
+        query.addBindValue(QString::fromStdString(listener->getBio()));
+        query.addBindValue(QString::fromStdString(listener->getPassword()));
+        query.addBindValue(listener->getId());
+
+        if(!query.exec())
+            return -1;
+
         listeners[foundInd] = listener;
+
         return listener->getId();
     }
 
@@ -51,6 +91,13 @@ bool ListenerRepository::remove(int id) {
         PlaylistRepository::getInstance().remove(playlist->getPlaylistId());
     }
 
+    QSqlQuery query;
+    query.prepare("DELETE FROM listeners WHERE listenerId=?");
+    query.addBindValue(id);
+
+    if(!query.exec())
+        return false;
+
     for(int i = 0; i < listeners.size(); i++) {
         if(listeners[i]->getId() == id) {
             listeners.erase(listeners.begin() + i);
@@ -58,17 +105,31 @@ bool ListenerRepository::remove(int id) {
         }
     }
 
-    return false;
+    return true;
 }
 
 std::optional<std::shared_ptr<Account>> ListenerRepository::search(int id) {
-    for(int i = 0; i < listeners.size(); i++) {
-        if(listeners[i]->getId() == id)
-            return listeners[i];
-    }
+    QSqlQuery query;
+    query.prepare("SELECT * FROM listeners WHERE listenerId=?");
+    query.addBindValue(id);
 
-    return std::nullopt;
+    if(!query.exec())
+        return std::nullopt;
+
+    if(!query.next())
+        return std::nullopt;
+
+    auto listener = std::make_shared<Listener>(
+        query.value("fullName").toString().toStdString(),
+        query.value("userName").toString().toStdString(),
+        query.value("bio").toString().toStdString(),
+        query.value("password").toString().toStdString(),
+        query.value("listenerId").toInt()
+        );
+
+    return listener;
 }
+
 std::optional<std::shared_ptr<Account>> ListenerRepository::searchByUserName(const std::string& userName) {
     for(const auto& listener : listeners) {
         if(listener->getUserName() == userName)
@@ -123,4 +184,24 @@ bool ListenerRepository::removeLikedSong(int songId) {
     }
 
     return true;
+}
+
+void ListenerRepository::loadListeners() {
+    listeners.clear();
+    QSqlQuery query("SELECT * FROM listeners");
+
+    while(query.next()) {
+        auto listener = std::make_shared<Listener>(
+            query.value("fullName").toString().toStdString(),
+            query.value("userName").toString().toStdString(),
+            query.value("bio").toString().toStdString(),
+            query.value("password").toString().toStdString(),
+            query.value("listenerId").toInt()
+            );
+
+        listeners.push_back(listener);
+
+        if(listener->getId() >= nextId)
+            nextId = listener->getId() + 1;
+    }
 }

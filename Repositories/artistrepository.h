@@ -24,6 +24,8 @@ public:
     bool remove(int id) override;
     std::optional<std::shared_ptr<Account>> search(int id) override;
     std::optional<std::shared_ptr<Account>> searchByUserName(const std::string& userName) override;
+
+    void loadArtists();
 };
 
 #endif // ARTISTREPOSITORY_H
