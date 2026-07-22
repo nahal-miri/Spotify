@@ -32,7 +32,7 @@ void CreateAlbumDialog::on_createButton_clicked()
         return;
     }
 
-    auto album = std::make_shared<Album>(name.toStdString(), currentArtist->getId());
+    auto album = std::make_shared<Album>(name.toStdString(),  currentArtist->getId());
 
     AlbumRepository::getInstance().save(album);
 

@@ -2,6 +2,7 @@
 #define ARTISTWINDOW_H
 
 #include <QDialog>
+#include <QListWidgetItem>
 #include "Entities/artist.h"
 #include <memory>
 
@@ -18,8 +19,12 @@ public:
     explicit ArtistWindow(std::shared_ptr<Artist> artist, QWidget *parent = nullptr);
     ~ArtistWindow();
 
+    void loadAlbums();
+
 private slots:
     void on_newAlbumButton_clicked();
+
+    void on_albumsListWidget_itemClicked(QListWidgetItem *item);
 
 private:
     Ui::ArtistWindow *ui;
