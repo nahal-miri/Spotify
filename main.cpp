@@ -4,7 +4,6 @@
 #include "Repositories/listenerrepository.h"
 #include "Repositories/playlistrepository.h"
 #include "Repositories/albumrepository.h"
-
 #include <QApplication>
 #include "Database/database.h"
 
