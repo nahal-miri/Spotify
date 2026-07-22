@@ -50,7 +50,7 @@ void MainWindow::on_loginButton_clicked()
             auto a = std::dynamic_pointer_cast<Artist>(*artist);
 
             if(a->getPassword() == password.toStdString()) {
-                ArtistWindow *window = new ArtistWindow;
+                ArtistWindow *window = new ArtistWindow(a);
                 window->show();
                 this->close();
                 return;

@@ -4,6 +4,7 @@
 #include <QSqlError>
 #include <QVariant>
 #include <algorithm>
+#include <QMessageBox>
 
 AlbumRepository  AlbumRepository::instance;
 
@@ -34,8 +35,9 @@ int AlbumRepository::save(const std::shared_ptr<Album>& obj) {
         query.addBindValue(QString::fromStdString(album->getName()));
         query.addBindValue(album->getArtistId());
 
-        if(!query.exec())
+        if(!query.exec()) {
             return -1;
+        }
 
         nextId++;
         albums.push_back(album);
