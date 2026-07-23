@@ -213,12 +213,3 @@ void AlbumRepository::loadAlbums() {
             nextId = album->getAlbumId() + 1;
     }
 }
-
-std::optional<std::shared_ptr<Album>> AlbumRepository::findById(int id) {
-    for(const auto& album : albums) {
-        if(album->getAlbumId() == id)
-            return album;
-    }
-
-    return std::nullopt;
-}

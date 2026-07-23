@@ -53,7 +53,7 @@ void ArtistWindow::on_albumsListWidget_itemClicked(QListWidgetItem *item)
 {
 
     int albumId = item->data(Qt::UserRole).toInt();
-    auto album = AlbumRepository::getInstance().findById(albumId);
+    auto album = AlbumRepository::getInstance().search(albumId);
 
     if(album.has_value()) {
         AlbumWindow window(currentArtist, *album);

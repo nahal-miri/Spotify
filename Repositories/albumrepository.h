@@ -29,7 +29,6 @@ public:
     void sortByName(std::vector<std::shared_ptr<Album>>& albums);
 
     void loadAlbums();
-    std::optional<std::shared_ptr<Album>> findById(int id);
 };
 
 #endif // ALBUMREPOSITORY_H
