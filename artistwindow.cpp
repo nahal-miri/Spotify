@@ -45,19 +45,8 @@ void ArtistWindow::on_newAlbumButton_clicked()
 {
     CreateAlbumDialog dialog(currentArtist);
 
-    if(dialog.exec() == QDialog::Accepted) {
-        // ui->albumsListWidget->clear();
-
-        // auto albums = AlbumRepository::getInstance().artistAlbums(currentArtist->getId());
-
-        // for(const auto& album : albums) {
-        //     QListWidgetItem *listItem = new QListWidgetItem(QString::fromStdString(album->getName()));
-        //     listItem->setData(Qt::UserRole, album->getAlbumId());
-        //     ui->albumsListWidget->addItem(listItem);
-        // }
-
+    if(dialog.exec() == QDialog::Accepted)
         loadAlbums();
-    }
 }
 
 void ArtistWindow::on_albumsListWidget_itemClicked(QListWidgetItem *item)
@@ -67,7 +56,7 @@ void ArtistWindow::on_albumsListWidget_itemClicked(QListWidgetItem *item)
     auto album = AlbumRepository::getInstance().findById(albumId);
 
     if(album.has_value()) {
-        AlbumWindow window(*album);
+        AlbumWindow window(currentArtist, *album);
         window.exec();
     }
 }
