@@ -1,7 +1,9 @@
 #include "artistwindow.h"
 #include "albumwindow.h"
+#include "editartistdialog.h"
 #include "ui_artistwindow.h"
 #include "Repositories/albumrepository.h"
+#include "Repositories/artistrepository.h"
 #include "createalbumdialog.h"
 #include <QMessageBox>
 
@@ -58,5 +60,31 @@ void ArtistWindow::on_albumsListWidget_itemClicked(QListWidgetItem *item)
     if(album.has_value()) {
         AlbumWindow window(currentArtist, *album);
         window.exec();
+        loadAlbums();
     }
 }
+
+void ArtistWindow::on_deleteAccountButton_clicked()
+{
+    QMessageBox::StandardButton reply = QMessageBox::question(this, "Delete Account", "Are you sure?", QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::No)
+        return;
+
+    ArtistRepository::getInstance().remove(currentArtist->getId());
+
+    accept();
+}
+
+
+void ArtistWindow::on_editProfileButton_clicked()
+{
+    EditArtistDialog dialog(currentArtist);
+
+    if(dialog.exec() == QDialog::Accepted) {
+        ui->artistNameLabel->setText(QString::fromStdString(currentArtist->getFullName()));
+
+        ui->artistBioLabel->setText(QString::fromStdString(currentArtist->getBio()));
+    }
+}
+

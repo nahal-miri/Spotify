@@ -62,3 +62,8 @@ void CreateSongDialog::on_createButton_clicked()
     accept();
 }
 
+void CreateSongDialog::on_cancelButton_clicked()
+{
+    reject();
+}
+

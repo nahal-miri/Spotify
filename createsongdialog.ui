@@ -29,96 +29,70 @@
     <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
    </property>
   </widget>
-  <widget class="QLineEdit" name="songNameLineEdit">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>30</y>
-     <width>113</width>
-     <height>20</height>
+     <x>120</x>
+     <y>40</y>
+     <width>168</width>
+     <height>148</height>
     </rect>
    </property>
-   <property name="placeholderText">
-    <string>Song Name</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="releaseYearLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>30</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Release Year</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="audioFileLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>70</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Audio File</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="browseButton">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>120</y>
-     <width>80</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Browse</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="createButton">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>130</y>
-     <width>80</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Create</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="cancelButton">
-   <property name="geometry">
-    <rect>
-     <x>50</x>
-     <y>180</y>
-     <width>80</width>
-     <height>18</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="genreLineEdit">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>70</y>
-     <width>113</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="placeholderText">
-    <string>Genre</string>
-   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLineEdit" name="songNameLineEdit">
+      <property name="placeholderText">
+       <string>Song Name</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="releaseYearLineEdit">
+      <property name="placeholderText">
+       <string>Release Year</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="audioFileLineEdit">
+      <property name="placeholderText">
+       <string>Audio File</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="genreLineEdit">
+      <property name="placeholderText">
+       <string>Genre</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="browseButton">
+        <property name="text">
+         <string>Browse</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="createButton">
+        <property name="text">
+         <string>Create</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QPushButton" name="cancelButton">
+      <property name="text">
+       <string>Cancel</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
  </widget>
  <resources/>

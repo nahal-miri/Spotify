@@ -132,11 +132,19 @@ std::optional<std::shared_ptr<Album>> AlbumRepository::search(int id) {
 std::vector<std::shared_ptr<Album>> AlbumRepository::artistAlbums(int id) {
 
     std::vector<std::shared_ptr<Album>> result;
+    std::shared_ptr<Album> singles = nullptr;
 
     for(const auto& album : albums) {
-        if(album->getArtistId() == id)
+        if(album->getArtistId() != id)
+            continue;
+        if(album->getName() == "Singles")
+            singles = album;
+        else
             result.push_back(album);
     }
+
+    if(singles != nullptr)
+        result.insert(result.begin(), singles);
 
     return result;
 }

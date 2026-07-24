@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>CreateAlbumDialog</class>
- <widget class="QDialog" name="CreateAlbumDialog">
+ <class>EditAlbumDialog</class>
+ <widget class="QDialog" name="EditAlbumDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,20 +16,13 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>110</x>
      <y>80</y>
      <width>168</width>
-     <height>64</height>
+     <height>48</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QLabel" name="albumNameLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Album Name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-      </property>
-     </widget>
-    </item>
     <item>
      <widget class="QLineEdit" name="albumNameLineEdit">
       <property name="placeholderText">
@@ -40,9 +33,9 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="createButton">
+       <widget class="QPushButton" name="saveButton">
         <property name="text">
-         <string>Create</string>
+         <string>Save</string>
         </property>
        </widget>
       </item>

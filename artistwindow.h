@@ -26,6 +26,10 @@ private slots:
 
     void on_albumsListWidget_itemClicked(QListWidgetItem *item);
 
+    void on_deleteAccountButton_clicked();
+
+    void on_editProfileButton_clicked();
+
 private:
     Ui::ArtistWindow *ui;
     std::shared_ptr<Artist> currentArtist;

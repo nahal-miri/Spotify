@@ -2,6 +2,7 @@
 #include "ui_editsongdialog.h"
 #include <QMessageBox>
 #include "Repositories/songrepository.h"
+#include "Repositories/albumrepository.h"
 
 EditSongDialog::EditSongDialog(QWidget *parent)
     : QDialog(parent)
@@ -10,11 +11,21 @@ EditSongDialog::EditSongDialog(QWidget *parent)
     ui->setupUi(this);
 }
 
-EditSongDialog::EditSongDialog(std::shared_ptr<Song> song, QWidget *parent)
+EditSongDialog::EditSongDialog(std::shared_ptr<Artist> artist, std::shared_ptr<Song> song, QWidget *parent)
     : QDialog(parent),
     ui(new Ui::EditSongDialog),
+    currentArtist(artist),
     currentSong(song) {
     ui->setupUi(this);
+
+    auto albums = AlbumRepository::getInstance().artistAlbums(currentArtist->getId());
+
+    for(const auto& album : albums) {
+        ui->albumComboBox->addItem(QString::fromStdString(album->getName()), album->getAlbumId());
+
+        if(album->getAlbumId() == currentSong->getAlbumId())
+            ui->albumComboBox->setCurrentIndex(ui->albumComboBox->count() - 1);
+    }
 
     ui->songNameLineEdit->setText(QString::fromStdString(song->getSongName()));
     ui->releaseYearLineEdit->setText(QString::number(song->getReleaseYear()));
@@ -39,10 +50,12 @@ void EditSongDialog::on_saveButton_clicked()
         return;
     }
 
+    int albumId = ui->albumComboBox->currentData().toInt();
     currentSong->setSongName(songName.toStdString());
     currentSong->setYear(releaseYear.toInt());
     currentSong->setGenre(genre.toStdString());
     currentSong->setFilePath(audioFile.toStdString());
+    currentSong->setAlbumId(albumId);
 
     int result = SongRepository::getInstance().save(currentSong);
 
@@ -52,5 +65,11 @@ void EditSongDialog::on_saveButton_clicked()
     }
 
     accept();
+}
+
+
+void EditSongDialog::on_cancelButton_clicked()
+{
+    reject();
 }
 

@@ -45,6 +45,8 @@ int ArtistRepository::save(const std::shared_ptr<Account>& obj) {
 
         nextId++;
         artists.push_back(artist);
+        auto singles = std::make_shared<Album>("Singles", artist->getId());
+        AlbumRepository::getInstance().save(singles);
 
         return artist->getId();
     }

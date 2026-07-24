@@ -48,6 +48,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         albumwindow.h albumwindow.cpp albumwindow.ui
         createsongdialog.h createsongdialog.cpp createsongdialog.ui
         editsongdialog.h editsongdialog.cpp editsongdialog.ui
+        editalbumdialog.h editalbumdialog.cpp editalbumdialog.ui
+        editartistdialog.h editartistdialog.cpp editartistdialog.ui
+        changepassworddialog.h changepassworddialog.cpp changepassworddialog.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Spotify APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

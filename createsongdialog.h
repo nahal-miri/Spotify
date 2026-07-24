@@ -23,6 +23,8 @@ private slots:
 
     void on_createButton_clicked();
 
+    void on_cancelButton_clicked();
+
 private:
     Ui::CreateSongDialog *ui;
     std::shared_ptr<Artist> currentArtist;

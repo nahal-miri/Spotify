@@ -202,8 +202,7 @@ std::vector<std::shared_ptr<Song>> SongRepository::getByLikedSongs(int listenerI
 
 int SongRepository::createSong(Artist& artist, const std::string& songName, int releaseYear, const std::string& genre, const std::string& audioFilePath, int albumId) {
     if (albumId != 0) {
-        auto album =
-            AlbumRepository::getInstance().search(albumId);
+        auto album = AlbumRepository::getInstance().search(albumId);
 
         if (!album)
             return -1;

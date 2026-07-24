@@ -27,6 +27,12 @@ private slots:
 
     void on_deleteSongButton_clicked();
 
+    void on_editAlbumButton_clicked();
+
+    void on_deleteButton_clicked();
+
+    void on_backButton_clicked();
+
 private:
     Ui::AlbumWindow *ui;
     std::shared_ptr<Album> currentAlbum;

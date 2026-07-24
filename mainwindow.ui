@@ -26,16 +26,16 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>30</y>
-      <width>111</width>
-      <height>126</height>
+      <x>140</x>
+      <y>70</y>
+      <width>168</width>
+      <height>111</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout_2">
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <widget class="QLabel" name="label">
        <property name="text">
@@ -71,18 +71,22 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="loginButton">
-       <property name="text">
-        <string>Login</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="registerButton">
-       <property name="text">
-        <string>Register</string>
-       </property>
-      </widget>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QPushButton" name="registerButton">
+         <property name="text">
+          <string>Register</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="loginButton">
+         <property name="text">
+          <string>Login</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </widget>

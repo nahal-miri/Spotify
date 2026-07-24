@@ -1,5 +1,6 @@
 #include "albumwindow.h"
 #include "createsongdialog.h"
+#include "editalbumdialog.h"
 #include "editsongdialog.h"
 #include "ui_albumwindow.h"
 #include "albumwindow.h"
@@ -7,6 +8,7 @@
 #include "albumwindow.h"
 #include <QString>
 #include "Repositories/songrepository.h"
+#include "Repositories/albumrepository.h"
 #include <QMessageBox>
 
 AlbumWindow::AlbumWindow(QWidget *parent)
@@ -75,11 +77,10 @@ void AlbumWindow::on_editSongButton_clicked()
     if(!song.has_value())
         return;
 
-    EditSongDialog dialog(*song);
+    EditSongDialog dialog(currentArtist, song.value());
 
     if(dialog.exec() == QDialog::Accepted)
         loadSongs();
-
 }
 
 
@@ -105,5 +106,36 @@ void AlbumWindow::on_deleteSongButton_clicked()
     }
 
     loadSongs();
+}
+
+
+void AlbumWindow::on_editAlbumButton_clicked()
+{
+    EditAlbumDialog dialog(currentAlbum);
+
+    if(dialog.exec() == QDialog::Accepted)
+        ui->albumNameLabel->setText(QString::fromStdString(currentAlbum->getName()));
+}
+
+
+void AlbumWindow::on_deleteButton_clicked()
+{
+    QMessageBox::StandardButton reply = QMessageBox::question(this, "Delete Album", "Are you sure you want to delete this album?", QMessageBox::Yes | QMessageBox::No);
+
+    if(reply == QMessageBox::No)
+        return;
+
+    if(!AlbumRepository::getInstance().remove(currentAlbum->getAlbumId())) {
+        QMessageBox::warning(this, "Error", "Failed to delete album.");
+        return;
+    }
+
+    accept();
+}
+
+
+void AlbumWindow::on_backButton_clicked()
+{
+    close();
 }
 

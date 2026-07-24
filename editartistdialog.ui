@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EditSongDialog</class>
- <widget class="QDialog" name="EditSongDialog">
+ <class>EditArtistDialog</class>
+ <widget class="QDialog" name="EditArtistDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,53 +16,50 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>120</x>
+     <x>130</x>
      <y>30</y>
      <width>168</width>
-     <height>174</height>
+     <height>187</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QLineEdit" name="songNameLineEdit">
+     <widget class="QLineEdit" name="fullNameLineEdit">
       <property name="placeholderText">
-       <string>Song Name</string>
+       <string>Full Name</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="releaseYearLineEdit">
+     <widget class="QLineEdit" name="userNameLineEdit">
       <property name="placeholderText">
-       <string>Release Year</string>
+       <string>Username</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="audioFileLineEdit">
-      <property name="placeholderText">
-       <string>Audio File</string>
+     <widget class="QLabel" name="label">
+      <property name="text">
+       <string>Bio:</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="genreLineEdit">
+     <widget class="QPlainTextEdit" name="bioPlainTextEdit">
       <property name="placeholderText">
-       <string>Genre</string>
+       <string/>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QComboBox" name="albumComboBox"/>
+     <widget class="QPushButton" name="changePasswordButton">
+      <property name="text">
+       <string>Change Password</string>
+      </property>
+     </widget>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="browseButton">
-        <property name="text">
-         <string>Browse</string>
-        </property>
-       </widget>
-      </item>
       <item>
        <widget class="QPushButton" name="saveButton">
         <property name="text">
@@ -70,14 +67,14 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QPushButton" name="cancelButton">
+        <property name="text">
+         <string>Cancel</string>
+        </property>
+       </widget>
+      </item>
      </layout>
-    </item>
-    <item>
-     <widget class="QPushButton" name="cancelButton">
-      <property name="text">
-       <string>Cancel</string>
-      </property>
-     </widget>
     </item>
    </layout>
   </widget>
