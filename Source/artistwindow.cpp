@@ -2,8 +2,8 @@
 #include "albumwindow.h"
 #include "editartistdialog.h"
 #include "ui_artistwindow.h"
-#include "Repositories/albumrepository.h"
-#include "Repositories/artistrepository.h"
+#include "../Repositories/albumrepository.h"
+#include "../Repositories/artistrepository.h"
 #include "createalbumdialog.h"
 #include <QMessageBox>
 

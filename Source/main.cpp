@@ -1,11 +1,11 @@
 #include "mainwindow.h"
-#include "Repositories/songrepository.h"
-#include "Repositories/artistrepository.h"
-#include "Repositories/listenerrepository.h"
-#include "Repositories/playlistrepository.h"
-#include "Repositories/albumrepository.h"
+#include "../Repositories/songrepository.h"
+#include "../Repositories/artistrepository.h"
+#include "../Repositories/listenerrepository.h"
+#include "../Repositories/playlistrepository.h"
+#include "../Repositories/albumrepository.h"
 #include <QApplication>
-#include "Database/database.h"
+#include "../Database/database.h"
 
 int main(int argc, char *argv[])
 {

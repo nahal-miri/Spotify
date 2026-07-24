@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <QListWidgetItem>
-#include "Entities/artist.h"
+#include "../Entities/artist.h"
 #include <memory>
 
 namespace Ui {

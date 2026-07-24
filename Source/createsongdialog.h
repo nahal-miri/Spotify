@@ -1,7 +1,7 @@
 #ifndef CREATESONGDIALOG_H
 #define CREATESONGDIALOG_H
-#include "Entities/artist.h"
-#include "Entities/album.h"
+#include "../Entities/artist.h"
+#include "../Entities/album.h"
 #include <QDialog>
 #include <memory>
 

@@ -1,8 +1,8 @@
 #include "createalbumdialog.h"
 #include "ui_createalbumdialog.h"
 #include <QMessageBox>
-#include "Repositories/albumrepository.h"
-#include "Entities/album.h"
+#include "../Repositories/albumrepository.h"
+#include "../Entities/album.h"
 
 CreateAlbumDialog::CreateAlbumDialog(QWidget *parent)
     : QDialog(parent)

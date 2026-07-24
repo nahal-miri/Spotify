@@ -1,7 +1,7 @@
 #ifndef EDITALBUMDIALOG_H
 #define EDITALBUMDIALOG_H
 #include <QDialog>
-#include "Entities/album.h"
+#include "../Entities/album.h"
 
 namespace Ui {
 class EditAlbumDialog;

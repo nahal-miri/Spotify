@@ -1,10 +1,10 @@
 #include "registerwindow.h"
 #include "ui_registerwindow.h"
 #include <QMessageBox>
-#include "Repositories/artistrepository.h"
-#include "Repositories/listenerrepository.h"
-#include "Entities/artist.h"
-#include "Entities/listener.h"
+#include "../Repositories/artistrepository.h"
+#include "../Repositories/listenerrepository.h"
+#include "../Entities/artist.h"
+#include "../Entities/listener.h"
 #include "mainwindow.h"
 
 RegisterWindow::RegisterWindow(QWidget *parent)

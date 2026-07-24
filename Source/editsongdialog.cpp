@@ -1,8 +1,8 @@
 #include "editsongdialog.h"
 #include "ui_editsongdialog.h"
 #include <QMessageBox>
-#include "Repositories/songrepository.h"
-#include "Repositories/albumrepository.h"
+#include "../Repositories/songrepository.h"
+#include "../Repositories/albumrepository.h"
 
 EditSongDialog::EditSongDialog(QWidget *parent)
     : QDialog(parent)

@@ -3,8 +3,8 @@
 
 #include <QDialog>
 #include <memory>
-#include "Entities/album.h"
-#include "Entities/artist.h"
+#include "../Entities/album.h"
+#include "../Entities/artist.h"
 
 namespace Ui {
 class AlbumWindow;

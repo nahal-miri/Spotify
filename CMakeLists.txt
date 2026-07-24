@@ -13,10 +13,10 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets Sql)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets Sql)
 
 set(PROJECT_SOURCES
-        main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        Source/main.cpp
+        Source/mainwindow.cpp
+        Source/mainwindow.h
+        Source/mainwindow.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -41,16 +41,16 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Database/database.cpp
         Database/database.h
         Exceptions/LoginException.h
-        artistwindow.h artistwindow.cpp artistwindow.ui
-        listenerwindow.h listenerwindow.cpp listenerwindow.ui
-        registerwindow.h registerwindow.cpp registerwindow.ui
-        createalbumdialog.h createalbumdialog.cpp createalbumdialog.ui
-        albumwindow.h albumwindow.cpp albumwindow.ui
-        createsongdialog.h createsongdialog.cpp createsongdialog.ui
-        editsongdialog.h editsongdialog.cpp editsongdialog.ui
-        editalbumdialog.h editalbumdialog.cpp editalbumdialog.ui
-        editartistdialog.h editartistdialog.cpp editartistdialog.ui
-        changepassworddialog.h changepassworddialog.cpp changepassworddialog.ui
+        Source/albumwindow.h Source/albumwindow.cpp Source/albumwindow.ui
+        Source/artistwindow.h Source/artistwindow.cpp Source/artistwindow.ui
+        Source/changepassworddialog.h Source/changepassworddialog.cpp Source/changepassworddialog.ui
+        Source/createalbumdialog.h Source/createalbumdialog.cpp Source/createalbumdialog.ui
+        Source/createsongdialog.h Source/createsongdialog.cpp Source/createsongdialog.ui
+        Source/editalbumdialog.h Source/editalbumdialog.cpp Source/editalbumdialog.ui
+        Source/editartistdialog.h Source/editartistdialog.cpp Source/editartistdialog.ui
+        Source/editsongdialog.h Source/editsongdialog.cpp Source/editsongdialog.ui
+        Source/listenerwindow.h Source/listenerwindow.cpp Source/listenerwindow.ui
+        Source/registerwindow.h Source/registerwindow.cpp Source/registerwindow.ui
 
     )
 # Define target properties for Android with Qt 6 as:

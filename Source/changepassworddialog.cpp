@@ -1,7 +1,7 @@
 #include "changepassworddialog.h"
 #include "ui_changepassworddialog.h"
 #include <QMessageBox>
-#include "Repositories/accountrepository.h"
+#include "../Repositories/accountrepository.h"
 
 ChangePasswordDialog::ChangePasswordDialog(QWidget *parent)
     : QDialog(parent)

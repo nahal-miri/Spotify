@@ -2,8 +2,8 @@
 #define EDITSONGDIALOG_H
 #include <QDialog>
 #include <memory>
-#include "Entities/song.h"
-#include "Entities/artist.h"
+#include "../Entities/song.h"
+#include "../Entities/artist.h"
 
 namespace Ui {
 class EditSongDialog;

@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <QMessageBox>
-#include "Repositories/listenerrepository.h"
-#include "Repositories/artistrepository.h"
-#include "Exceptions/LoginException.h"
+#include "../Repositories/listenerrepository.h"
+#include "../Repositories/artistrepository.h"
+#include "../Exceptions/LoginException.h"
 #include "artistwindow.h"
 #include "listenerwindow.h"
 #include "registerwindow.h"

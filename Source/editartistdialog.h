@@ -1,6 +1,6 @@
 #ifndef EDITARTISTDIALOG_H
 #define EDITARTISTDIALOG_H
-#include "Entities/artist.h"
+#include "../Entities/artist.h"
 #include <QDialog>
 
 namespace Ui {

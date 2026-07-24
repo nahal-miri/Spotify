@@ -1,6 +1,6 @@
 #include "createsongdialog.h"
 #include "ui_createsongdialog.h"
-#include "Repositories/songrepository.h"
+#include "../Repositories/songrepository.h"
 #include <QFileDialog>
 #include <QMessageBox>
 

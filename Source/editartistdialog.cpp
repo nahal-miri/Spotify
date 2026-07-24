@@ -1,7 +1,7 @@
 #include "editartistdialog.h"
 #include "changepassworddialog.h"
 #include "ui_editartistdialog.h"
-#include "Repositories/artistrepository.h"
+#include "../Repositories/artistrepository.h"
 
 EditArtistDialog::EditArtistDialog(QWidget *parent)
     : QDialog(parent)

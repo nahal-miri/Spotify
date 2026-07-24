@@ -1,6 +1,6 @@
 #ifndef CHANGEPASSWORDDIALOG_H
 #define CHANGEPASSWORDDIALOG_H
-#include "Entities/account.h"
+#include "../Entities/account.h"
 #include <QDialog>
 
 namespace Ui {

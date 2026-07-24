@@ -7,8 +7,8 @@
 #include "ui_albumwindow.h"
 #include "albumwindow.h"
 #include <QString>
-#include "Repositories/songrepository.h"
-#include "Repositories/albumrepository.h"
+#include "../Repositories/songrepository.h"
+#include "../Repositories/albumrepository.h"
 #include <QMessageBox>
 
 AlbumWindow::AlbumWindow(QWidget *parent)

@@ -1,7 +1,7 @@
 #include "editalbumdialog.h"
 #include "ui_editalbumdialog.h"
 #include <QMessageBox>
-#include "Repositories/albumrepository.h"
+#include "../Repositories/albumrepository.h"
 
 EditAlbumDialog::EditAlbumDialog(QWidget *parent)
     : QDialog(parent)
