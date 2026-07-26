@@ -13,6 +13,10 @@ PlaylistRepository& PlaylistRepository::getInstance() {
     return instance;
 }
 
+const std::vector<std::shared_ptr<Playlist>>& PlaylistRepository::getPlaylists() const {
+    return playlists;
+}
+
 int PlaylistRepository::save(const std::shared_ptr<Playlist>& obj) {
     auto playlist = std::dynamic_pointer_cast<Playlist>(obj);
     if(!playlist)
@@ -32,7 +36,9 @@ int PlaylistRepository::save(const std::shared_ptr<Playlist>& obj) {
         query.addBindValue(playlist->getPlaylistId());
         query.addBindValue(QString::fromStdString(playlist->getPlaylistName()));
         query.addBindValue(playlist->getListenerId());
-
+        qDebug() << "Saving playlist:"
+                 << QString::fromStdString(playlist->getPlaylistName())
+                 << playlist->getListenerId();
         if(!query.exec())
             return -1;
 

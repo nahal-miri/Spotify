@@ -6,41 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>457</width>
+    <height>390</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>240</y>
-     <width>341</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
-   </property>
-  </widget>
-  <widget class="QWidget" name="">
-   <property name="geometry">
-    <rect>
-     <x>110</x>
-     <y>50</y>
-     <width>171</width>
-     <height>151</height>
+     <x>15</x>
+     <y>20</y>
+     <width>421</width>
+     <height>351</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>50</number>
+    </property>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <property name="spacing">
+       <number>50</number>
+      </property>
       <item>
        <widget class="QLineEdit" name="fullNameLineEdit">
         <property name="readOnly">
@@ -58,10 +48,20 @@
         </property>
        </widget>
       </item>
+      <item>
+       <widget class="QLineEdit" name="bioLineEdit">
+        <property name="placeholderText">
+         <string>Biography</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <property name="spacing">
+       <number>30</number>
+      </property>
       <item>
        <widget class="QLineEdit" name="passwordLineEdit">
         <property name="placeholderText">
@@ -70,30 +70,32 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="roleComboBox">
-        <item>
-         <property name="text">
-          <string>Listener</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Artist</string>
-         </property>
-        </item>
+       <widget class="QRadioButton" name="artistRadioButton">
+        <property name="text">
+         <string>Artist</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QRadioButton" name="listenerRadioButton">
+        <property name="text">
+         <string>Listener</string>
+        </property>
        </widget>
       </item>
      </layout>
     </item>
     <item>
-     <widget class="QLineEdit" name="bioLineEdit">
-      <property name="placeholderText">
-       <string>Biography</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <layout class="QHBoxLayout" name="horizontalLayout_3">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <property name="leftMargin">
+       <number>10</number>
+      </property>
+      <property name="rightMargin">
+       <number>10</number>
+      </property>
       <item>
        <widget class="QPushButton" name="registerButton">
         <property name="text">
@@ -114,38 +116,5 @@
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>RegisterWindow</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>RegisterWindow</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>

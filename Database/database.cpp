@@ -94,5 +94,15 @@ bool Database::createTables() {
         ");"
         );
 
+    query.exec(
+        "CREATE TABLE IF NOT EXISTS likedSongs ("
+        "listenerId INTEGER NOT NULL,"
+        "songId INTEGER NOT NULL,"
+        "PRIMARY KEY(listenerId, songId),"
+        "FOREIGN KEY(listenerId) REFERENCES listeners(listenerId),"
+        "FOREIGN KEY(songId) REFERENCES songs(songId)"
+        ");"
+        );
+
     return true;
 }

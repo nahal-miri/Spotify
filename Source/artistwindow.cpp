@@ -36,7 +36,7 @@ void ArtistWindow::loadAlbums() {
     ui->albumsListWidget->clear();
     auto albums = AlbumRepository::getInstance().artistAlbums(currentArtist->getId());
 
-    for (const auto& album : albums) {
+    for(const auto& album : albums) {
         QListWidgetItem *item = new QListWidgetItem(QString::fromStdString(album->getName()));
         item->setData(Qt::UserRole, album->getAlbumId());
         ui->albumsListWidget->addItem(item);
@@ -53,7 +53,6 @@ void ArtistWindow::on_newAlbumButton_clicked()
 
 void ArtistWindow::on_albumsListWidget_itemClicked(QListWidgetItem *item)
 {
-
     int albumId = item->data(Qt::UserRole).toInt();
     auto album = AlbumRepository::getInstance().search(albumId);
 

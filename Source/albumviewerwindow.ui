@@ -1,48 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>ListenerWindow</class>
- <widget class="QDialog" name="ListenerWindow">
+ <class>AlbumViewerWindow</class>
+ <widget class="QDialog" name="AlbumViewerWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>482</width>
-    <height>320</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>10</x>
+     <x>20</x>
      <y>20</y>
-     <width>431</width>
-     <height>278</height>
+     <width>371</width>
+     <height>271</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout_3">
     <property name="spacing">
-     <number>10</number>
+     <number>20</number>
     </property>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="profileButton">
+       <widget class="QPushButton" name="backButton">
         <property name="text">
-         <string>Profile</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>6</width>
-          <height>6</height>
-         </size>
+         <string>Back</string>
         </property>
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_2">
+       <spacer name="horizontalSpacer">
         <property name="orientation">
          <enum>Qt::Orientation::Horizontal</enum>
         </property>
@@ -54,34 +48,35 @@
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QLineEdit" name="searchSongLineEdit">
+        <property name="placeholderText">
+         <string>Search Song...</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
-      <property name="spacing">
-       <number>10</number>
-      </property>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout">
         <property name="spacing">
-         <number>10</number>
+         <number>2</number>
         </property>
         <item>
-         <widget class="QLabel" name="artistsLabel">
+         <widget class="QLabel" name="albumNameLabel">
           <property name="text">
-           <string>Artists</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Album Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QLineEdit" name="searchArtistLineEdit">
-          <property name="placeholderText">
-           <string>Search Artist...</string>
+         <widget class="QLabel" name="artistNameLabel">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Artist Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
-        </item>
-        <item>
-         <widget class="QListWidget" name="artistsListWidget"/>
         </item>
        </layout>
       </item>
@@ -91,28 +86,28 @@
          <number>10</number>
         </property>
         <item>
-         <widget class="QLabel" name="playlistsLabel">
+         <widget class="QLabel" name="label">
           <property name="text">
-           <string>Your Playlists</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Songs&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="createPlaylistButton">
+         <widget class="QListWidget" name="songsListWidget"/>
+        </item>
+        <item>
+         <widget class="QPushButton" name="likeSongButton">
           <property name="text">
-           <string>Create Playlist</string>
+           <string>❤️</string>
           </property>
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="removePlaylistButton">
+         <widget class="QPushButton" name="addToPlayListButton">
           <property name="text">
-           <string>Remove Playlist</string>
+           <string>➕ Add To Playlist</string>
           </property>
          </widget>
-        </item>
-        <item>
-         <widget class="QListWidget" name="playlistsListWidget"/>
         </item>
        </layout>
       </item>

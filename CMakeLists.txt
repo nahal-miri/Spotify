@@ -51,6 +51,14 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         Source/editsongdialog.h Source/editsongdialog.cpp Source/editsongdialog.ui
         Source/listenerwindow.h Source/listenerwindow.cpp Source/listenerwindow.ui
         Source/registerwindow.h Source/registerwindow.cpp Source/registerwindow.ui
+        Source/artistprofilewindow.h Source/artistprofilewindow.cpp Source/artistprofilewindow.ui
+        Source/albumviewerwindow.h Source/albumviewerwindow.cpp Source/albumviewerwindow.ui
+        Source/playlistwindow.h Source/playlistwindow.cpp Source/playlistwindow.ui
+        Source/createplaylistdialog.h Source/createplaylistdialog.cpp Source/createplaylistdialog.ui
+        Source/listenerprofilewindow.h Source/listenerprofilewindow.cpp Source/listenerprofilewindow.ui
+        Source/editprofilewindow.h Source/editprofilewindow.cpp Source/editprofilewindow.ui
+        Source/changepasswordwindow.h Source/changepasswordwindow.cpp Source/changepasswordwindow.ui
+
 
     )
 # Define target properties for Android with Qt 6 as:

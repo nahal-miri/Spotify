@@ -6,60 +6,88 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>418</width>
+    <height>330</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>20</y>
-     <width>141</width>
-     <height>201</height>
+     <x>80</x>
+     <y>10</y>
+     <width>260</width>
+     <height>301</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_5">
     <item>
-     <widget class="QLabel" name="artistNameLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Artist Name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <property name="spacing">
+       <number>5</number>
       </property>
-     </widget>
+      <item>
+       <widget class="QLabel" name="artistNameLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Artist Name&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="artistBioLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Artist Bio&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="newAlbumButton">
+        <property name="text">
+         <string>New Album</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
-     <widget class="QLabel" name="artistBioLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Artist Bio&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <layout class="QVBoxLayout" name="verticalLayout_3">
+      <property name="spacing">
+       <number>5</number>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="newAlbumButton">
-      <property name="text">
-       <string>New Album</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QListWidget" name="albumsListWidget"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="editProfileButton">
-      <property name="text">
-       <string>Edit Profile</string>
-      </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QPushButton" name="deleteAccountButton">
-      <property name="text">
-       <string>Delete Account</string>
-      </property>
-     </widget>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+       </layout>
+      </item>
+      <item>
+       <widget class="QListWidget" name="albumsListWidget"/>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_2">
+        <property name="spacing">
+         <number>10</number>
+        </property>
+        <item>
+         <widget class="QPushButton" name="editProfileButton">
+          <property name="text">
+           <string>Edit Profile</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="deleteAccountButton">
+          <property name="text">
+           <string>Delete Account</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>

@@ -36,8 +36,8 @@ void MainWindow::on_loginButton_clicked()
         if(listener) {
             auto l = std::dynamic_pointer_cast<Listener>(*listener);
 
-            if(l->getPassword() == password.toStdString()) {
-                ListenerWindow *window = new ListenerWindow();
+            if(l && l->getPassword() == password.toStdString()) {
+                ListenerWindow *window = new ListenerWindow(l);
                 window->show();
                 this->close();
                 return;

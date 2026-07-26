@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EditArtistDialog</class>
- <widget class="QDialog" name="EditArtistDialog">
+ <class>EditProfileWindow</class>
+ <widget class="QDialog" name="EditProfileWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>461</width>
-    <height>374</height>
+    <width>480</width>
+    <height>418</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,34 +16,41 @@
   <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>10</x>
      <y>10</y>
-     <width>401</width>
-     <height>341</height>
+     <width>431</width>
+     <height>361</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_4">
     <property name="spacing">
-     <number>20</number>
+     <number>10</number>
     </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_3">
       <property name="spacing">
-       <number>20</number>
+       <number>30</number>
       </property>
       <item>
-       <widget class="QLineEdit" name="fullNameLineEdit">
-        <property name="placeholderText">
-         <string>Full Name</string>
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <property name="spacing">
+         <number>20</number>
         </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="userNameLineEdit">
-        <property name="placeholderText">
-         <string>Username</string>
-        </property>
-       </widget>
+        <item>
+         <widget class="QLineEdit" name="fullNameLineEdit">
+          <property name="placeholderText">
+           <string>Full Name</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="userNameLineEdit">
+          <property name="placeholderText">
+           <string>Username</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -58,11 +65,7 @@
          </widget>
         </item>
         <item>
-         <widget class="QPlainTextEdit" name="bioPlainTextEdit">
-          <property name="placeholderText">
-           <string/>
-          </property>
-         </widget>
+         <widget class="QTextEdit" name="biotextEdit"/>
         </item>
        </layout>
       </item>

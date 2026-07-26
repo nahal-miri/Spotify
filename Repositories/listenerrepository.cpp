@@ -1,5 +1,5 @@
 #include "listenerrepository.h"
-#include "songrepository.h"
+#include "playlistrepository.h"
 #include "playlistrepository.h"
 #include <QSqlQuery>
 #include <QSqlError>
@@ -40,7 +40,8 @@ int ListenerRepository::save(const std::shared_ptr<Account>& obj) {
 
         nextId++;
         listeners.push_back(listener);
-
+        auto favoritePlaylist = std::make_shared<Playlist>("Favorite Songs", listener->getId());
+        PlaylistRepository::getInstance().save(favoritePlaylist);
         return listener->getId();
     }
 
@@ -140,27 +141,28 @@ std::optional<std::shared_ptr<Account>> ListenerRepository::searchByUserName(con
 }
 
 bool ListenerRepository::updateLiked(int listenerId, int songId, bool value) {
-    auto account = search(listenerId);
-    if(!account)
-        return false;
-
-    auto listener = std::dynamic_pointer_cast<Listener>(*account);
-    if(!listener)
-        return false;
-
-    auto song = SongRepository::getInstance().search(songId);
-    if (!song)
-        return false;
+    QSqlQuery query;
 
     if(value) {
-        listener->likeSong(songId);
+        query.prepare(
+            "INSERT OR IGNORE INTO likedSongs(listenerId, songId) "
+            "VALUES(?, ?)"
+            );
+        query.addBindValue(listenerId);
+        query.addBindValue(songId);
     }
     else {
-        listener->unlikeSong(songId);
+        query.prepare(
+            "DELETE FROM likedSongs "
+            "WHERE listenerId=? AND songId=?"
+            );
+        query.addBindValue(listenerId);
+        query.addBindValue(songId);
     }
 
-    return true;
+    return query.exec();
 }
+
 bool ListenerRepository::isLiked(int listenerId, int songId) {
     auto account = search(listenerId);
     if(!account)
@@ -179,9 +181,15 @@ bool ListenerRepository::isLiked(int listenerId, int songId) {
 }
 
 bool ListenerRepository::removeLikedSong(int songId) {
-    for (const auto& listener : listeners) {
+    QSqlQuery query;
+    query.prepare("DELETE FROM likedSongs WHERE songId=?");
+    query.addBindValue(songId);
+
+    if(!query.exec())
+        return false;
+
+    for(const auto& listener : listeners)
         listener->unlikeSong(songId);
-    }
 
     return true;
 }
@@ -198,6 +206,16 @@ void ListenerRepository::loadListeners() {
             query.value("password").toString().toStdString(),
             query.value("listenerId").toInt()
             );
+
+        QSqlQuery likedQuery;
+        likedQuery.prepare("SELECT songId FROM likedSongs WHERE listenerId=?");
+        likedQuery.addBindValue(listener->getId());
+
+        if(likedQuery.exec()) {
+            while(likedQuery.next()) {
+                listener->likeSong(likedQuery.value(0).toInt());
+            }
+        }
 
         listeners.push_back(listener);
 

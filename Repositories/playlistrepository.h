@@ -19,6 +19,8 @@ private:
 public:
     static PlaylistRepository& getInstance();
 
+    const std::vector<std::shared_ptr<Playlist>>& getPlaylists() const;
+
     int save(const std::shared_ptr<Playlist>& obj) override;
     bool remove(int id) override;
     std::optional<std::shared_ptr<Playlist>> search(int id) override;

@@ -12,6 +12,7 @@ RegisterWindow::RegisterWindow(QWidget *parent)
     , ui(new Ui::RegisterWindow)
 {
     ui->setupUi(this);
+    ui->listenerRadioButton->setChecked(true);
 }
 
 RegisterWindow::~RegisterWindow()
@@ -37,7 +38,7 @@ void RegisterWindow::on_registerButton_clicked()
         return;
     }
 
-    if(ui->roleComboBox->currentText() == "Listener") {
+    if(ui->listenerRadioButton->isChecked()) {
         auto listener = std::make_shared<Listener>(
             fullName.toStdString(),
             username.toStdString(),
@@ -71,7 +72,6 @@ void RegisterWindow::on_registerButton_clicked()
     window->show();
     this->close();
 }
-
 
 void RegisterWindow::on_backButton_clicked()
 {

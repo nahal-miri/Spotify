@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EditAlbumDialog</class>
- <widget class="QDialog" name="EditAlbumDialog">
+ <class>CreatePlaylistDialog</class>
+ <widget class="QDialog" name="CreatePlaylistDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,20 +16,27 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>50</y>
-     <width>371</width>
-     <height>191</height>
+     <x>7</x>
+     <y>30</y>
+     <width>391</width>
+     <height>221</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
-     <number>40</number>
+     <number>20</number>
     </property>
     <item>
-     <widget class="QLineEdit" name="albumNameLineEdit">
+     <widget class="QLabel" name="playlistNameLabel">
+      <property name="text">
+       <string>Playlist Name</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="playlistNameLineEdit">
       <property name="placeholderText">
-       <string>Album Name</string>
+       <string>Playlist Name</string>
       </property>
      </widget>
     </item>
@@ -39,15 +46,15 @@
        <number>30</number>
       </property>
       <property name="leftMargin">
-       <number>10</number>
+       <number>15</number>
       </property>
       <property name="rightMargin">
-       <number>10</number>
+       <number>15</number>
       </property>
       <item>
-       <widget class="QPushButton" name="saveButton">
+       <widget class="QPushButton" name="createButton">
         <property name="text">
-         <string>Save</string>
+         <string>Create</string>
         </property>
        </widget>
       </item>

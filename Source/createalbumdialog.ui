@@ -16,29 +16,48 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>120</x>
-     <y>80</y>
-     <width>168</width>
-     <height>64</height>
+     <x>10</x>
+     <y>30</y>
+     <width>381</width>
+     <height>171</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
+   <layout class="QVBoxLayout" name="verticalLayout_2">
+    <property name="spacing">
+     <number>40</number>
+    </property>
     <item>
-     <widget class="QLabel" name="albumNameLabel">
-      <property name="text">
-       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Album Name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <property name="spacing">
+       <number>4</number>
       </property>
-     </widget>
-    </item>
-    <item>
-     <widget class="QLineEdit" name="albumNameLineEdit">
-      <property name="placeholderText">
-       <string>Album Name</string>
-      </property>
-     </widget>
+      <item>
+       <widget class="QLabel" name="albumNameLabel">
+        <property name="text">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Album Name&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="albumNameLineEdit">
+        <property name="placeholderText">
+         <string>Album Name</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </item>
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout">
+      <property name="spacing">
+       <number>20</number>
+      </property>
+      <property name="leftMargin">
+       <number>5</number>
+      </property>
+      <property name="rightMargin">
+       <number>5</number>
+      </property>
       <item>
        <widget class="QPushButton" name="createButton">
         <property name="text">
